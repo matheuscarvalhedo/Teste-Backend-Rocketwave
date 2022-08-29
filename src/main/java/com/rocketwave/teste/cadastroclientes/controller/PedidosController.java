@@ -2,9 +2,11 @@ package com.rocketwave.teste.cadastroclientes.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,12 @@ public class PedidosController {
 	
 	@Autowired
 	private PedidosRepository pedidosRepository;
+	
+	@GetMapping(value = "/listar")
+	public List<Pedidos> buscarTodos() {
+		List<Pedidos> buscarPedidos = pedidosRepository.findAll();
+		return buscarPedidos;
+	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -41,7 +49,7 @@ public class PedidosController {
 				    .findById(idItem)
 				    .orElseThrow(() -> 
 				           new ResponseStatusException(
-				        		   HttpStatus.BAD_REQUEST, "Item não existe"));
+				        		   HttpStatus.BAD_REQUEST, "Pedido não existe"));
 
 		Pedidos pedidos = new Pedidos();
 

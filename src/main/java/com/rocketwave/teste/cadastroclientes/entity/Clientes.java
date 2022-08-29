@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,23 +24,22 @@ public class Clientes {
 	private Integer id;
 	
 	@Column(nullable = false, length = 150)
-	@NotEmpty
+	@NotEmpty(message = "O campo nome não pode estar vazio")
 	private String nome;
 	
 	@Column(nullable = false, length = 50)
-	@NotEmpty
+	@NotEmpty(message = "O campo email não pode estar vazio")
 	private String email;
 	
 	@Column(nullable = false, length = 150)
-	@NotEmpty
+	@NotEmpty(message = "O campo endereço não pode estar vazio")
 	private String endereco;
 	
 	@Column(nullable = false, length = 11)
-	@NotNull
+	@NotEmpty(message = "O campo telefone não pode estar vazio")
 	private String telefone;
 	
 	@Column(name = "data_nascimento")
-	@NotEmpty
 	private String dataNascimento;
 
 }
