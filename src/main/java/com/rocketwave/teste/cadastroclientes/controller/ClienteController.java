@@ -31,13 +31,13 @@ public class ClienteController {
 		return buscarClientes;
 	}
 
-	@PostMapping
+	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Clientes salvar(@RequestBody Clientes clientes) {
 		return repository.save(clientes);
 	}
 	
-	@PutMapping("{id}")
+	@PutMapping("/atualizar/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void atualizar(@PathVariable Integer id, @RequestBody Clientes clientesAtualizado) {
 		repository
@@ -50,7 +50,7 @@ public class ClienteController {
 }
 	
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/deletar/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Integer id) {
 		repository

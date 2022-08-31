@@ -18,7 +18,7 @@ public class ItemController {
 	@Autowired
 	private ItemRepository itemRepository;
 	
-	@PostMapping
+	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Item salvar(@RequestBody Item item) {
 		return itemRepository.save(item);

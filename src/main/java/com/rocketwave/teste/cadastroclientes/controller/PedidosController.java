@@ -32,7 +32,7 @@ public class PedidosController {
 	private PedidosRepository pedidosRepository;
 	
 
-	@PostMapping
+	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Pedidos salvar(@RequestBody PedidosDto dto) {
 		LocalDate data = LocalDate.parse(dto.getDataNascimento(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -60,7 +60,7 @@ public class PedidosController {
 		
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/deletar/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletar(@PathVariable Integer id) {
 		pedidosRepository
