@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Positive;
 
 import lombok.Data;
 
@@ -27,10 +28,14 @@ public class Item {
 	@Column
 	private Integer quantidade;
 	
-	@Column
+	@Positive
+	@Column(nullable = false)
 	private BigDecimal valorUnitario;
 	
 	@Column
 	private BigDecimal valorTotal;
+	
+	
+	
 	
 }

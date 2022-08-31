@@ -2,11 +2,11 @@ package com.rocketwave.teste.cadastroclientes.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +31,6 @@ public class PedidosController {
 	@Autowired
 	private PedidosRepository pedidosRepository;
 	
-	@GetMapping(value = "/listar")
-	public List<Pedidos> buscarTodos() {
-		List<Pedidos> buscarPedidos = pedidosRepository.findAll();
-		return buscarPedidos;
-	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -58,12 +53,23 @@ public class PedidosController {
 		pedidos.setEndereco(dto.getEndereco());
 		pedidos.setTelefone(dto.getTelefone());
 		pedidos.setDataNascimento(data);
-		pedidos.setEndrecoEntrega(dto.getEnderecoEntrega());
+		pedidos.setEnderecoEntrega(dto.getEnderecoEntrega());
 		pedidos.setValorTotal(dto.getValorTotal());
 		pedidos.setItem(item);
 		return pedidosRepository.save(pedidos);
 		
-		
 	}
-
+	
+	@DeleteMapping("{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deletar(@PathVariable Integer id) {
+		pedidosRepository
+		.findById(id)
+		.map( pedidos -> {
+			pedidosRepository.delete(pedidos);
+			return Void.TYPE;
+		})
+		.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+	
 }

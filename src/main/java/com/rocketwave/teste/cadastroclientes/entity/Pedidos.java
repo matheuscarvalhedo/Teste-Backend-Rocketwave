@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
-
+import javax.validation.constraints.Positive;
 
 import lombok.Data;
 
@@ -39,8 +39,9 @@ public class Pedidos {
 	private LocalDate dataNascimento;
 	
 	@Column(name = "endereco_entrega", nullable = false, length = 150)
-	private String endrecoEntrega;
+	private String enderecoEntrega;
 	
+	@Positive
 	@Column
 	private BigDecimal valorTotal;
 	
